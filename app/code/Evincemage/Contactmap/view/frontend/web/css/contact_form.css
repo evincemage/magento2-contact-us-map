@@ -1,0 +1,20 @@
+.contact-index-index .page-title-wrapper .page-title{margin: 0px; font-size:36px; margin-bottom:20px; text-transform: uppercase; font-weight:600;}
+.contact-index-index .cms-content-important{padding: 18px; margin: 0px;background: #f9f9f9; font-size: 18px; font-weight: 400;}
+.contact-index-index .cms-content .block .box-title>span{font-weight: 600; font-size: 20px;}
+.contact-index-index .contact-info-number{font-size: 26px; font-weight:400;}
+.contact-index-index .cms-content .block-contact-info{padding: 0 40px 0 0}
+.contact-index-index .contact .fieldset{padding:40px; background:#F0F0F0; margin-bottom: 10px;}
+.contact-index-index .block-static-block{width: 50%; float:left;}
+.contact-index-index .page-main .form.contact{width:50%!important; margin-bottom: 10px; float: left!important;}
+.contact-index-index .page-main .form.contact .legend{font-weight:600; font-size: 20px;}	
+.contact-index-index .block-static-block{margin-bottom:20px!important;}
+.contact-index-index .cms-content .block .box-title{margin: 0 0 12px;}
+.contact-index-index .block-content .box{width: 100%!important;margin-bottom: 20px!important; }
+.contact-index-index .block-content .box .box-phone{margin: 0px;}
+.contact-index-index .box-content p{font-size: 16px;}
+.contact-index-index .contact .fieldset .field{margin-bottom: 10px;}
+.contact-index-index .contact .actions-toolbar{text-align: center;}
+.contact-index-index .contact .actions-toolbar .primary{float:none;}
+.contact-index-index .contact .actions-toolbar .primary button{padding:18px 90px; font-size: 18px; text-transform: uppercase;transition: 0.2s all ease-in-out; border: 1px solid #006BB4; margin: 0px;}
+.contact-index-index .contact .actions-toolbar .primary button:hover{border: 1px solid #006BB4; background:#fff; color:#006BB4; }
+

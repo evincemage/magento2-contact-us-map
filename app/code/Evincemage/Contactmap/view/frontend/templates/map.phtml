@@ -1,0 +1,96 @@
+<?php
+
+$key = $block->getApiKey();
+
+$mapaddressreal = $block->getStoreAddress();
+
+$mapheight = $block->getMapHeight();
+
+$mapmarker = $block->getMarkerImage();
+
+$mapaddressdefault = $block->getDefaultAddress();
+
+$address = $lat = $long = $imagepath = "";
+
+if($key){ ?>
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $key;?>&sensor=true"></script>
+
+<?php
+
+if($mapaddressreal)
+    {
+        $address .= $mapaddressreal;
+    } else {
+        $address .= $mapaddressdefault;
+    }
+
+if($mapmarker)
+    $imagepath .= $this->getUrl('pub/media/', ['_secure' => $this->getRequest()->isSecure()])."/evincemage/contactmap/".$mapmarker;
+
+    $prepAddr = str_replace(' ','+',$address);
+
+    $geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?key='.$key.'&address='.$prepAddr.'&sensor=false');
+
+    $output= json_decode($geocode);
+
+    if (empty($output->status) || $output->status != 'OK' || empty($output->results[0])) {
+        return null;
+    } else {
+
+    $lat = $output->results[0]->geometry->location->lat; //got latitude as per address
+
+    $long = $output->results[0]->geometry->location->lng;
+
+    } ?>
+    <div id="map_canvas" style="width:100%;height:<?php echo $mapheight;?>px; float:right; margin-top: 10px; margin-bottom: 10px;"></div>
+<?php } else { echo __("Please add Google Map Api key in Contact us Map General configuration, You can find Google Map Api key from here - https://developers.google.com/maps/documentation/javascript/get-api-key"); }
+
+ ?>
+
+<script type="text/javascript">
+require(['jquery'], function($) {
+ $(document).ready(function () {
+    var key = '<?php echo $key;?>';
+    if(key != ""){
+   initialize();
+    }
+ });
+ });
+  function initialize() {
+    var key = '<?php echo $key;?>';
+    if(key != ""){
+    var lat = '<?php echo $lat;?>';
+    var long = '<?php echo $long;?>';
+    var position = map = image = marker = contentString = infowindow = "";
+    var position = new google.maps.LatLng(lat,long);
+    var myOptions = {
+      zoom: 17,
+      center: position,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+        
+    var image = '<?php echo $imagepath;?>'; //get marker image
+        
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title:"<?php echo $address; ?>",
+        icon: image
+    });  
+ 
+    var contentString = '<?php echo $address;?>';
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    var infowindow = new google.maps.InfoWindow({content: contentString,width:1000,height:1000});
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+  });
+    infowindow.open(map,marker);
+  }
+}
+</script>
